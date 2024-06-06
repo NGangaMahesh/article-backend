@@ -12,7 +12,7 @@ app.post('/scrape', async (req, res) => {
   const { topic } = req.body;
   try {
     articles = await scrapeMedium(topic);
-    await res.status(200).json(articles);
+    res.status(200).json(articles);
   } catch (error) {
     res.status(500).json({ error: 'Failed to scrape articles' });
   }
