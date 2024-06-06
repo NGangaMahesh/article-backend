@@ -1,9 +1,11 @@
 import puppeteer from 'puppeteer';
 
 async function scrapeMedium(topic) {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto(`https://medium.com/search?q=${topic}`);
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
+  const page = await browser.newPage();
+  await page.goto(`https://medium.com/search?q=${topic}`, { waitUntil: 'networkidle2' });
   
     // Wait for the articles container to load
     await page.waitForSelector('#root > div > div.l.c > div.ca.cb.l > div > main > div > div > div:nth-child(2) > div');
