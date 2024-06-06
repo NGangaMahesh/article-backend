@@ -14,7 +14,7 @@ app.post('/scrape', async (req, res) => {
     articles = await scrapeMedium(topic);
     res.status(200).json(articles);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to scrape articles' });
+    res.status(500).json({ error: error.message });
   }
 });
 
